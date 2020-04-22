@@ -1,0 +1,19 @@
+{
+  "name": "vue-cli-plugin-gh-pages-auto-deploy",
+  "version": "0.1.0",
+  "description": "vue-cli plugin to automate deploying on github pages by using github actions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue",
+    "vue-cli",
+    "deploy",
+    "gh-pages",
+    "gh-actions"
+  ],
+  "author": "Roland Doda <rolanddoda2014@gmail.com>",
+  "license": "ISC",
+  "homepage": "https://github.com/Rolanddoda/vue-cli-plugin-gh-pages-auto-deploy"
+}
