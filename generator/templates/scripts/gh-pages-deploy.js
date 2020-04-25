@@ -17,19 +17,17 @@ const thirdLog =
     await execa("git", ["checkout", "--orphan", "gh-pages"]);
     console.log(firstLog);
     await execa("npm", ["run", "build"]);
-    // Understand if it's dist or build folder
-    const prodFolderName = fs.existsSync("dist") ? "dist" : "build";
-    await execa("git", ["--work-tree", prodFolderName, "add", "--all"]);
+    await execa("git", ["--work-tree", 'dist', "add", "--all"]);
     await execa("git", [
       "--work-tree",
-      prodFolderName,
+      'dist',
       "commit",
       "-m",
       "gh-pages"
     ]);
     console.log(secondLog);
     await execa("git", ["push", "origin", "HEAD:gh-pages", "--force"]);
-    await execa("rm", ["-r", prodFolderName]);
+    await execa("rm", ["-r", 'dist']);
     await execa("git", ["checkout", "-f", "master"]);
     await execa("git", ["branch", "-D", "gh-pages"]);
     console.log(thirdLog);

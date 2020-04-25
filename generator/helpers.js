@@ -18,6 +18,19 @@ async function addUserNameAndEmail (api) {
   fs.writeFileSync(filePath, updatedFile, { encoding: 'utf8' })
 }
 
+function extendPackage (api) {
+  api.extendPackage({
+    scripts: {
+      "gh-pages-deploy": "node scripts/gh-pages-deploy.js"
+    },
+    "devDependencies": {
+      "chalk": "^4.0.0",
+      "execa": "^4.0.0",
+      "node-emoji": "^1.10.0"
+    }
+  })
+}
+
 async function getUserCredentials () {
   const {stdout: userName} = await execa("git", ["config", "user.name"])
   const {stdout: email} = await execa("git", ["config", "user.email"])
@@ -27,4 +40,4 @@ async function getUserCredentials () {
   }
 }
 
-module.exports = { addFiles, addUserNameAndEmail }
+module.exports = { addFiles, addUserNameAndEmail, extendPackage }
