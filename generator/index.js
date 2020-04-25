@@ -1,9 +1,10 @@
-import plugin from './helpers'
+const plugin = require('./helpers')
 
-module.exports = (api, opts) => {
+module.exports = async(api, opts) => {
   plugin.addFiles(api, opts)
-  
+
   api.onCreateComplete(() => {
-    api.exitLog('Enjoy automatic deploy to github pages! 😉')
+    plugin.addUserNameAndEmail(api)
+    api.exitLog(`Enjoy automatic deploy to github pages! 😉`)
   })
 }

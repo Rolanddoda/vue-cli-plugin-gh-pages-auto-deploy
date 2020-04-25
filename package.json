@@ -15,5 +15,12 @@
   ],
   "author": "Roland Doda <rolanddoda2014@gmail.com>",
   "license": "ISC",
-  "homepage": "https://github.com/Rolanddoda/vue-cli-plugin-gh-pages-auto-deploy"
+  "homepage": "https://github.com/Rolanddoda/vue-cli-plugin-gh-pages-auto-deploy",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rolanddoda/vue-cli-plugin-gh-pages-auto-deploy.git"
+  },
+  "devDependencies": {
+    "execa": "^4.0.0"
+  }
 }
