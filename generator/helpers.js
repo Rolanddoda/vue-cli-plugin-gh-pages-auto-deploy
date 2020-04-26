@@ -2,8 +2,8 @@ const execa = require("execa")
 const fs = require('fs')
 
 async function getUserCredentials() {
-  const {stdout: userName} = await execa("git", ["config", "user.name"])
-  const {stdout: email} = await execa("git", ["config", "user.email"])
+  const {stdout: userName} = await execa.command('git config user.name')
+  const {stdout: email} = await execa.command('git config user.email')
   return {
     username: userName.replace(' ', ''),
     email
@@ -11,8 +11,8 @@ async function getUserCredentials() {
 }
 
 async function getRepoName() {
-  const {stdout: repoUrl} = await execa('git', ['config', '--get', 'remote.origin.url'])
-  const {stdout: repoName} = await execa('basename', ['-s', '.git', repoUrl])
+  const {stdout: repoUrl} = await execa.command('git config --get remote.origin.url')
+  const {stdout: repoName} = await execa.command(`basename -s .git ${repoUrl}`)
   return repoName
 }
 

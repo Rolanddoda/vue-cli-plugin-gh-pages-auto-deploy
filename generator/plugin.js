@@ -13,7 +13,7 @@ function addFiles(api, opts) {
 async function addUserNameAndEmail(api) {
   const filePath = api.resolve('.github/workflows/gh-pages-deploy.yml')
   const file = fs.readFileSync(filePath, 'utf8')
-  const {username, email} = helpers.getUserCredentials()
+  const {username, email} = await helpers.getUserCredentials()
   const updatedFile = file.replace('[[username]]', username).replace('[[email]]', email)
   fs.writeFileSync(filePath, updatedFile, {encoding: 'utf8'})
 }
