@@ -20,7 +20,7 @@
     "type": "git",
     "url": "git+https://github.com/Rolanddoda/vue-cli-plugin-gh-pages-auto-deploy.git"
   },
-  "devDependencies": {
+  "dependencies ": {
     "execa": "^4.0.0"
   }
 }
