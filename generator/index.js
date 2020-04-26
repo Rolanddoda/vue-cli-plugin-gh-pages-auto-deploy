@@ -4,7 +4,7 @@ module.exports = (api, opts) => {
   plugin.extendPackage(api)
   plugin.addFiles(api, opts)
 
-  api.onCreateComplete(async () => {
+  api.afterInvoke(async () => {
     await plugin.addUserNameAndEmail(api)
     await plugin.createOrUpdateVueConfig(api)
     await plugin.lintCode(api)
