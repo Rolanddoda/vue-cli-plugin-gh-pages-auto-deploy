@@ -14,22 +14,16 @@ const thirdLog =
 
 (async () => {
   try {
-    await execa("git", ["checkout", "--orphan", "gh-pages"]);
+    await execa.command('git checkout --orphan gh-pages')
     console.log(firstLog);
-    await execa("npm", ["run", "build"]);
-    await execa("git", ["--work-tree", 'dist', "add", "--all"]);
-    await execa("git", [
-      "--work-tree",
-      'dist',
-      "commit",
-      "-m",
-      "gh-pages"
-    ]);
+    await execa.command('npm run build')
+    await execa.command('git --work-tree dist add --all')
+    await execa.command('git --work-tree dist commit -m "gh-pages"')
     console.log(secondLog);
-    await execa("git", ["push", "origin", "HEAD:gh-pages", "--force"]);
-    await execa("rm", ["-r", 'dist']);
-    await execa("git", ["checkout", "-f", "master"]);
-    await execa("git", ["branch", "-D", "gh-pages"]);
+    await execa.command('git push origin HEAD:gh-pages --force')
+    await execa('rm -r dist')
+    await execa('git checkout -f master')
+    await execa('git branch -D gh-pages')
     console.log(thirdLog);
   } catch (e) {
     console.log(e.message);
