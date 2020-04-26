@@ -34,22 +34,13 @@ function extendPackage(api) {
 async function createOrUpdateVueConfig(api) {
   const config = api.resolve('vue.config.js')
 
-  if (!fs.existsSync(config)) {
-    const repoName = await helpers.getRepoName()
-    const template = `module.exports = {\npublicPath: process.env.NODE_ENV === "production" ? "/${repoName}/" : "/"\n}`
-    fs.writeFileSync(config, template, {encoding: 'utf-8'})
-  } else {
+  if (!fs.existsSync(config)) await helpers.createVueConfig(config)
+  else {
     const file = require(config)
-    if (!file.publicPath) {
-      const repoName = await helpers.getRepoName()
-      const {EOL} = require('os')
-      const fileLines = fs.readFileSync(config, 'utf-8').split(/\r?\n/g)
-      const newLine = `publicPath: process.env.NODE_ENV === "production" ? "/${repoName}/" : "/",`
-      fileLines.splice(1, 0, newLine)
-      fs.writeFileSync(config, fileLines.join(EOL), {encoding: 'utf-8'})
-    }
+    if (!file.publicPath) await helpers.updateVueConfig(config)
   }
 }
+
 module.exports = {
   addFiles,
   addUserNameAndEmail,
