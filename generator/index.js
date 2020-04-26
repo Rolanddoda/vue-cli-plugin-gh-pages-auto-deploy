@@ -1,4 +1,4 @@
-const plugin = require('./helpers')
+const plugin = require('./plugin')
 
 module.exports = async (api, opts) => {
   plugin.extendPackage(api)
