@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-gh-pages-auto-deploy",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "vue-cli plugin to automate deploying on github pages by using github actions",
   "main": "index.js",
   "scripts": {
