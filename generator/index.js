@@ -1,12 +1,13 @@
 const plugin = require('./plugin')
 
-module.exports = async (api, opts) => {
+module.exports = (api, opts) => {
   plugin.extendPackage(api)
   plugin.addFiles(api, opts)
 
-  api.onCreateComplete(() => {
-    plugin.addUserNameAndEmail(api)
-    plugin.createOrUpdateVueConfig(api)
+  api.onCreateComplete(async () => {
+    await plugin.addUserNameAndEmail(api)
+    await plugin.createOrUpdateVueConfig(api)
+    await plugin.lintCode(api)
     api.exitLog(`Enjoy automatic deploy to github pages! 😉`)
   })
 }

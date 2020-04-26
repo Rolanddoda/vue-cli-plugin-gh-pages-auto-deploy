@@ -1,5 +1,6 @@
 const helpers = require('./helpers')
 const fs = require('fs')
+const execa = require("execa")
 
 function addFiles(api, opts) {
   const files = {
@@ -41,9 +42,16 @@ async function createOrUpdateVueConfig(api) {
   }
 }
 
+async function lintCode (api) {
+  if (api.generator.hasPlugin('@vue/cli-plugin-eslint')) {
+    await execa.command('vue-cli-service lint')
+  }
+}
+
 module.exports = {
   addFiles,
   addUserNameAndEmail,
   extendPackage,
-  createOrUpdateVueConfig
+  createOrUpdateVueConfig,
+  lintCode
 }

@@ -32,4 +32,4 @@ async function updateVueConfig (configPath) {
   fs.writeFileSync(configPath, fileLines.join(EOL), {encoding: 'utf-8'})
 }
 
-module.exports = {getUserCredentials, getRepoName, createVueConfig, updateVueConfig}
+module.exports = {getUserCredentials, createVueConfig, updateVueConfig}
