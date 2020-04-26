@@ -4,7 +4,7 @@
   "description": "vue-cli plugin to automate deploying on github pages by using github actions",
   "main": "index.js",
   "scripts": {
-    "publish": "np --no-tests"
+    "release": "np --no-tests"
   },
   "keywords": [
     "vue",
