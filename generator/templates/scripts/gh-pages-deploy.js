@@ -21,9 +21,9 @@ const thirdLog =
     await execa.command('git --work-tree dist commit -m "gh-pages"')
     console.log(secondLog);
     await execa.command('git push origin HEAD:gh-pages --force')
-    await execa('rm -r dist')
-    await execa('git checkout -f master')
-    await execa('git branch -D gh-pages')
+    await execa.command('rm -r dist')
+    await execa.command('git checkout -f master')
+    await execa.command('git branch -D gh-pages')
     console.log(thirdLog);
   } catch (e) {
     console.log(e.message);
