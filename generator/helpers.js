@@ -10,6 +10,20 @@ async function getUserCredentials() {
   }
 }
 
+function getPackageManager(api) {
+  if (fs.existsSync(api.resolve('package-lock.json'))) {
+    return 'npm'
+  }
+  if (fs.existsSync(api.resolve('yarn.lock'))) {
+    return 'yarn'
+  }
+}
+
+function getCleanInstallCommand(api) {
+  const npmOrYarn = getPackageManager(api)
+  return npmOrYarn === 'npm' ? 'npm ci' : 'yarn install --frozen-lockfile'
+}
+
 async function getRepoName() {
   const { stdout: repoUrl } = await execa.command('git config --get remote.origin.url')
   const { stdout: repoName } = await execa.command(`basename -s .git ${repoUrl}`)
@@ -32,4 +46,4 @@ async function updateVueConfig(configPath) {
   fs.writeFileSync(configPath, fileLines.join(EOL), { encoding: 'utf-8' })
 }
 
-module.exports = { getUserCredentials, createVueConfig, updateVueConfig }
+module.exports = { getUserCredentials, createVueConfig, updateVueConfig, getCleanInstallCommand }

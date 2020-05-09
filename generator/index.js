@@ -1,11 +1,10 @@
 const plugin = require('./plugin')
 
-module.exports = (api, opts) => {
+module.exports = async (api) => {
   plugin.extendPackage(api)
-  plugin.addFiles(api, opts)
+  await plugin.addFiles(api)
 
   api.afterInvoke(async () => {
-    await plugin.addUserNameAndEmail(api)
     await plugin.createOrUpdateVueConfig(api)
     await plugin.lintCode(api)
     api.exitLog(`
