@@ -6,9 +6,10 @@ async function getRepoName() {
     const { stdout: repoUrl } = await execa.command('git config --get remote.origin.url')
     return path.basename(repoUrl).replace('.git', '')
   } catch (e) {
-    throw new Error(
-      'You must add a remote before installing this plugin. Adding a remote: https://help.github.com/en/github/using-git/adding-a-remote'
+    console.error(
+      "'You must add a remote before installing this plugin. Adding a remote: https://help.github.com/en/github/using-git/adding-a-remote'"
     )
+    process.exit(1)
   }
 }
 

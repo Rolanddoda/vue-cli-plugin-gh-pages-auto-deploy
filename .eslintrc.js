@@ -14,6 +14,7 @@ module.exports = {
     ecmaVersion: 2018,
   },
   rules: {
+    'no-process-exit': 'off',
     'linebreak-style': ['error', 'unix'],
     'prettier/prettier': 'error',
   },
