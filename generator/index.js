@@ -1,11 +1,24 @@
+const path = require('path')
 const plugin = require('./plugin')
 
+async function getRepoName() {
+  try {
+    const { stdout: repoUrl } = await execa.command('git config --get remote.origin.url')
+    return path.basename(repoUrl).replace('.git', '')
+  } catch (e) {
+    throw new Error(
+      'You must add a remote before installing this plugin. Adding a remote: https://help.github.com/en/github/using-git/adding-a-remote'
+    )
+  }
+}
+
 module.exports = async (api) => {
+  const repoName = await getRepoName()
   plugin.extendPackage(api)
   await plugin.addFiles(api)
 
   api.afterInvoke(async () => {
-    await plugin.createOrUpdateVueConfig(api)
+    await plugin.createOrUpdateVueConfig(api, repoName)
     await plugin.lintCode(api)
     api.exitLog(`
       ☺☺ Enjoy automatic deployment ☺☺

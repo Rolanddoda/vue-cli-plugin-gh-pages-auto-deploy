@@ -26,13 +26,13 @@ function extendPackage(api) {
   })
 }
 
-async function createOrUpdateVueConfig(api) {
+async function createOrUpdateVueConfig(api, repoName) {
   const config = api.resolve('vue.config.js')
 
-  if (!fs.existsSync(config)) await helpers.createVueConfig(config)
+  if (!fs.existsSync(config)) await helpers.createVueConfig(config, repoName)
   else {
     const file = require(config)
-    if (!file.publicPath) await helpers.updateVueConfig(config)
+    if (!file.publicPath) await helpers.updateVueConfig(config, repoName)
   }
 }
 

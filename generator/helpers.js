@@ -1,6 +1,5 @@
 const execa = require('execa')
 const fs = require('fs')
-const path = require('path')
 
 async function getUserCredentials() {
   const { stdout: userName } = await execa.command('git config user.name')
@@ -25,25 +24,12 @@ function getCleanInstallCommand(api) {
   return npmOrYarn === 'npm' ? 'npm ci' : 'yarn install --frozen-lockfile'
 }
 
-async function getRepoName() {
-  try {
-    const { stdout: repoUrl } = await execa.command('git config --get remote.origin.url')
-    return path.basename(repoUrl).replace('.git', '')
-  } catch (e) {
-    throw new Error(
-      'You must add a remote before installing this plugin. Adding a remote: https://help.github.com/en/github/using-git/adding-a-remote'
-    )
-  }
-}
-
-async function createVueConfig(configPath) {
-  const repoName = await getRepoName()
+async function createVueConfig(configPath, repoName) {
   const template = `module.exports = {\n publicPath: process.env.NODE_ENV === "production" ? "/${repoName}/" : "/" \n }`
   fs.writeFileSync(configPath, template, { encoding: 'utf-8' })
 }
 
-async function updateVueConfig(configPath) {
-  const repoName = await getRepoName()
+async function updateVueConfig(configPath, repoName) {
   const { EOL } = require('os')
   const fileLines = fs.readFileSync(configPath, 'utf-8').split(/\r?\n/g)
   const newLine = `publicPath: process.env.NODE_ENV === "production" ? "/${repoName}/" : "/",`
