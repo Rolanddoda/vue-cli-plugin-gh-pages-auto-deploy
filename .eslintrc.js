@@ -4,11 +4,7 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:node/recommended',
-    'plugin:prettier/recommended'
-  ],
+  extends: ['eslint:recommended', 'plugin:node/recommended', 'plugin:prettier/recommended'],
   plugins: ['prettier'],
   globals: {
     Atomics: 'readonly',
@@ -19,6 +15,6 @@ module.exports = {
   },
   rules: {
     'linebreak-style': ['error', 'unix'],
-    'prettier/prettier': 'error'
+    'prettier/prettier': 'error',
   },
-};
+}
