@@ -1,5 +1,6 @@
 const path = require('path')
 const plugin = require('./plugin')
+const execa = require('execa')
 
 async function getRepoName() {
   try {
