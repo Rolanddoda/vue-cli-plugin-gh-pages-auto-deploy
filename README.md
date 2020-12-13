@@ -14,7 +14,7 @@ Install the plugin into your project:
 
 ```sh
 cd vue-your-plugin
-vue add vue-cli-plugin-gh-pages-auto-deploy
+vue add gh-pages-auto-deploy
 ```
 
 ## What this plugin does ?
