@@ -2,18 +2,9 @@
 
 -------
 
-## :rocket: Getting Started
-
-If yon don't have a project created with Vue CLI:
+## Install the plugin into your project:
 
 ```sh
-vue create vue-your-plugin
-```
-
-Install the plugin into your project:
-
-```sh
-cd vue-your-plugin
 vue add gh-pages-auto-deploy
 ```
 
@@ -26,6 +17,16 @@ deployment by using [Github Actions](https://help.github.com/en/actions/getting-
 On every push or merge to the `master` branch, your code will be built and pushed
 to a branch named `gh-pages`.
 So, practically your code will automatically be deployed every time you push on `master`.
+
+If you want to use another branch (not master), go to `.github/workflows/gh-pages-deploy.yml`
+and change the "master" to your branch name
+
+```yaml
+on:
+  push:
+    branches:
+      - master <== Change this
+```
 
 ## How to make it work ?
 - After you have added the plugin, just commit and push to `master`.

@@ -8,15 +8,16 @@ const thirdLog = `${emoji.get('rocket')} ${chalk.green('Your app successfully de
 
 ;(async () => {
   try {
+    const { stdout: currentBranch } = await execa.command('git branch --show-current')
     await execa.command('git checkout --orphan gh-pages')
     console.log(firstLog)
-    await execa.command('npm run build')
+    await execa.command('npm run build', { stdio: 'inherit' })
     await execa.command('git --work-tree dist add --all')
     await execa.command('git --work-tree dist commit -m "gh-pages"')
     console.log(secondLog)
-    await execa.command('git push origin HEAD:gh-pages --force')
+    await execa.command('git push origin HEAD:gh-pages --force', { stdio: 'inherit' })
     await execa.command('rm -r dist')
-    await execa.command('git checkout -f master')
+    await execa.command(`git checkout -f ${currentBranch}`)
     await execa.command('git branch -D gh-pages')
     console.log(thirdLog)
   } catch (e) {
