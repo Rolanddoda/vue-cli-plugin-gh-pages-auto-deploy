@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --fix . && echo 'Lint complete.'",
-    "release": "np --no-tests"
+    "release": "np --no-tests --no-yarn"
   },
   "keywords": [
     "vue",
